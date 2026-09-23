@@ -1,0 +1,39 @@
+name: Automated API Performance & Functional Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Newman & HTML Reporter
+        run: |
+          npm install -g newman newman-reporter-htmlextra
+
+      - name: Execute Postman Collection Tests
+        run: |
+          newman run "PostAir Weather API.postman_collection.json" \
+            -e "Dev Env.postman_environment.json" \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export ./results/report.html
+
+      - name: Upload HTML Test Report Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-test-report
+          path: ./results/report.html
