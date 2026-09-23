@@ -1,5 +1,12 @@
 # PostAir Weather API - Baseline Performance & Functional Tests
 
+![API Tests](https://github.com/xfxradeon/PostAir-Weather-Api-Performance-Test/actions/workflows/api-tests.yml/badge.svg)
+![Status](https://img.shields.io/badge/Test%20Execution-Passed%20(100%25)-brightgreen)
+![Newman](https://img.shields.io/badge/Runner-Newman%20CLI-FF6C37?logo=postman&logoColor=white)
+
+---
+
+
 An automated API test suite created from an OpenAPI 3.1 contract to validate response timing, server latency metrics, and payload size bounds against mock and live endpoints.
 
 ---
